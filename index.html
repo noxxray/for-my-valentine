@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>For My Love ❤️</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to right, #f9d5e5, #fbc2eb);
+      color: #3a0ca3;
+      text-align: center;
+      padding: 50px;
+      overflow: hidden;
+      height: 100vh;
+    }
+
+    h1 {
+      font-size: 3em;
+      margin-bottom: 20px;
+      opacity: 0;
+      animation: fadeIn 2s forwards;
+    }
+
+    .text-box {
+      font-size: 1.2em;
+      max-width: 700px;
+      margin: 20px auto;
+      line-height: 1.6;
+      background: rgba(255, 255, 255, 0.7);
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      text-align: left;
+      min-height: 150px;
+    }
+
+    .poem {
+      font-size: 1.5em;
+      margin-top: 30px;
+      line-height: 1.8;
+      font-style: italic;
+      text-align: center;
+      min-height: 200px;
+    }
+
+    .heart {
+      color: #ff4d6d;
+    }
+
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+
+    .floating-heart {
+      position: absolute;
+      font-size: 1.5em;
+      animation: float 6s linear infinite;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(100vh) translateX(0) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(-10vh) translateX(50px) rotate(360deg); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+  <h1>For My Love ❤️</h1>
+
+  <div class="text-box" id="letter"></div>
+  <div class="poem" id="poem"></div>
+
+  <script>
+    const letterText = `My dearest,
+I miss you more than words can say. Every moment without you feels empty, and I keep thinking of your smile.
+You are my sunshine, my peace, and the reason my heart beats a little faster every day.
+
+Can’t wait to see you again. Until then, know that I’m sending all my love to you. ❤️`;
+
+    const poemText = `کچھ لمحے تمہارے بغیر سنا لگتے ہیں،
+ہر دن تمہاری یاد میں ڈوبا لگتا ہے۔
+تم ہو تو دل کو چین ملتا ہے،
+تم نہیں تو دنیا ویران لگتی ہے۔
+
+میری ہر دعا میں تم شامل ہو،
+میری ہر سوچ میں تمہاری تصویر ہے۔
+میرا عشق تمہارے نام ہے،
+میری دنیا تمہارے بغیر ادھوری ہے۔`;
+
+    function typeText(element, text, speed = 50, callback) {
+      let i = 0;
+      function typing() {
+        if (i < text.length) {
+          element.innerHTML += text[i] === '\n' ? '<br>' : text[i];
+          i++;
+          setTimeout(typing, speed);
+        } else if (callback) callback();
+      }
+      typing();
+    }
+
+    const letterEl = document.getElementById('letter');
+    const poemEl = document.getElementById('poem');
+
+    // Type the letter first, then the poem
+    typeText(letterEl, letterText, 50, () => {
+      setTimeout(() => typeText(poemEl, poemText, 50), 1000);
+    });
+
+    // Floating hearts effect
+    function createHeart() {
+      const heart = document.createElement('div');
+      heart.className = 'floating-heart';
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.fontSize = (10 + Math.random() * 20) + 'px';
+      heart.innerHTML = '❤️';
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 6000);
+    }
+
+    setInterval(createHeart, 500);
+  </script>
+</body>
+</html>
